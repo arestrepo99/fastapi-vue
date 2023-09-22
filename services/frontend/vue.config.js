@@ -3,6 +3,6 @@ module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     host: '0.0.0.0', // Allow connections from any host
-    port: 80, // Adjust the port as needed
+    port: 8080, // Adjust the port as needed
   },
 })
