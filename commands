@@ -1,0 +1,49 @@
+https://testdriven.io/blog/developing-a-single-page-app-with-fastapi-and-vuejs/
+
+  GNU nano 2.9.3                     /etc/nginx/sites-available/default                                
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+
+    location /mario {
+        alias /home/ubuntu/mario.js;
+        index index.html;
+    }
+
+    location /donut {
+        alias /home/ubuntu/donut.js;
+        index index.html;
+    }
+    location /gta {
+        alias /home/ubuntu/gta;
+        index index.html;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /api {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        rewrite ^/api/(.*) /$1 break;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
