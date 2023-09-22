@@ -4,5 +4,6 @@ module.exports = defineConfig({
   devServer: {
     host: '0.0.0.0', // Allow connections from any host
     port: 8080, // Adjust the port as needed
+    disableHostCheck: true,
   },
 })
