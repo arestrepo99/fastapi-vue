@@ -5,8 +5,10 @@ import axios from 'axios';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import { Quasar } from 'quasar'
+import quasarUserOptions from './quasar-user-options'
 
-const app = createApp(App);
+const app = createApp(App).use(Quasar, quasarUserOptions);
 
 axios.defaults.withCredentials = true;
 // axios.defaults.baseURL = 'http://cloud.arec.me/api/';  // the FastAPI backend

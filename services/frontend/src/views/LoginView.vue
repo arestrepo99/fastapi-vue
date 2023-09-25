@@ -2,14 +2,27 @@
   <section>
     <form @submit.prevent="submit">
       <div class="mb-3">
-        <label for="username" class="form-label">Username:</label>
-        <input type="text" name="username" v-model="form.username" class="form-control" />
+        <q-input 
+          type="text" 
+          name="username" 
+          v-model="form.username"
+          label="Username" 
+          required 
+          :error="logginError!=null"
+          :error-message="logginError"
+          />
       </div>
       <div class="mb-3">
-        <label for="password" class="form-label">Password:</label>
-        <input type="password" name="password" v-model="form.password" class="form-control" />
+        <q-input 
+          type="password" 
+          name="password" 
+          v-model="form.password" 
+          label="Password" 
+          required
+          :error="logginError!=null"
+        />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <q-btn type="submit" style="width:100%" label="Submit" />
     </form>
   </section>
   {{ logginError }}
@@ -26,7 +39,8 @@ export default defineComponent({
       form: {
         username: '',
         password:'',
-      }
+      },
+      loading: false,
     };
   },
   computed: {
@@ -36,14 +50,18 @@ export default defineComponent({
     ...mapActions(['logIn']),
     async submit() {
       const User = new FormData();
+
       User.append('username', this.form.username);
       User.append('password', this.form.password);
+      this.loading = true;
       try {
         await this.logIn(User);
         this.$router.push('/dashboard');
       } catch (error) {
+        this.loading = false;
         throw 'Username or password is incorrect. Please try again.';
       }
+      this.loading = false;
     }
   }
 });

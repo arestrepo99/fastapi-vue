@@ -9,7 +9,7 @@ import axios from 'axios';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Ping',
+  name: 'HelloWorld',
   data() {
     return {
       msg: '',
