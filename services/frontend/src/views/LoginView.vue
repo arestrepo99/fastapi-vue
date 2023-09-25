@@ -12,11 +12,12 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </section>
+  {{ logginError }}
 </template>
 
 <script>
 import { defineComponent } from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default defineComponent({
   name: 'LoginView',
@@ -28,14 +29,21 @@ export default defineComponent({
       }
     };
   },
+  computed: {
+    ...mapGetters(['logginError'])
+  },
   methods: {
     ...mapActions(['logIn']),
     async submit() {
       const User = new FormData();
       User.append('username', this.form.username);
       User.append('password', this.form.password);
-      await this.logIn(User);
-      this.$router.push('/dashboard');
+      try {
+        await this.logIn(User);
+        this.$router.push('/dashboard');
+      } catch (error) {
+        throw 'Username or password is incorrect. Please try again.';
+      }
     }
   }
 });

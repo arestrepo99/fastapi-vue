@@ -1,25 +1,53 @@
 import axios from 'axios';
 
+// const UNAUTHORIZED = 401;
+// axios.interceptors.response.use(
+//   response => response,
+//   error => {
+//     const {status} = error.response;
+//     if (status === UNAUTHORIZED) {
+//       dispatch(logOut());
+//     }
+//     return Promise.reject(error);
+//  }
+// );
+
+
 const state = {
   user: null,
+  loggedIn: false,
+  logginError: null,
 };
 
 const getters = {
   isAuthenticated: state => !!state.user,
   stateUser: state => state.user,
+  loggedIn: state => state.loggedIn,
+  logginError: state => state.logginError,
 };
 
 const actions = {
-  async register({dispatch}, form) {
-    await axios.post('register', form);
-    let UserForm = new FormData();
-    UserForm.append('username', form.username);
-    UserForm.append('password', form.password);
-    await dispatch('logIn', UserForm);
+  async register({dispatch, commit}, form) {
+    try {
+      await axios.post('register', form);
+      let UserForm = new FormData();
+      UserForm.append('username', form.username);
+      UserForm.append('password', form.password);
+      await dispatch('logIn', UserForm);
+    } catch (error) {
+      commit('setLogginError', error.response.data.detail);
+      throw error;
+    }
   },
-  async logIn({dispatch}, user) {
-    await axios.post('login', user);
-    await dispatch('viewMe');
+  async logIn({dispatch, commit}, user) {
+    try {
+      await axios.post('login', user)
+      await dispatch('viewMe');
+      commit('setLogginError', null);
+    } catch (error) {
+      commit('setLogginError', error.response.data.detail);
+      throw error;
+    }
   },
   async viewMe({commit}) {
     let {data} = await axios.get('users/whoami');
@@ -38,10 +66,14 @@ const actions = {
 const mutations = {
   setUser(state, username) {
     state.user = username;
+    state.loggedIn = true;
   },
   logout(state, user){
     state.user = user;
   },
+  setLogginError(state, error) {
+    state.logginError = error;
+  }
 };
 
 export default {

@@ -8,6 +8,7 @@ class Users(models.Model):
     password = fields.CharField(max_length=128, null=True)
     created_at = fields.DatetimeField(auto_now_add=True)
     modified_at = fields.DatetimeField(auto_now=True)
+    is_superuser = fields.BooleanField(default=False)
 
 
 class Notes(models.Model):

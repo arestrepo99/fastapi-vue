@@ -16,11 +16,12 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </section>
+  {{ logginError }}
 </template>
 
 <script>
 import { defineComponent } from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default defineComponent({
   name: 'RegisterView',
@@ -32,6 +33,9 @@ export default defineComponent({
         password: '',
       },
     };
+  },
+  computed: {
+    ...mapGetters(['logginError'])
   },
   methods: {
     ...mapActions(['register']),

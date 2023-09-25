@@ -2,17 +2,17 @@
   <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="/">FastAPI + Vue</a>
+        <a class="navbar-brand" href="/">Vendo Flores</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul v-if="isLoggedIn" class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <router-link class="nav-link" to="/">Home</router-link>
+              <router-link class="nav-link" to="/">Productos</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
+              <router-link class="nav-link" to="/admin">Admin</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/profile">My Profile</router-link>

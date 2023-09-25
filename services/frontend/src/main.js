@@ -9,7 +9,9 @@ import store from './store';
 const app = createApp(App);
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://cloud.arec.me/api/';  // the FastAPI backend
+// axios.defaults.baseURL = 'http://cloud.arec.me/api/';  // the FastAPI backend
+axios.defaults.baseURL = 'http://localhost:5000/';  // the FastAPI backend
+
 
 axios.interceptors.response.use(undefined, function (error) {
   if (error) {
@@ -17,7 +19,11 @@ axios.interceptors.response.use(undefined, function (error) {
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       store.dispatch('logOut');
-      return router.push('/login')
+      if (error.response.data.detail == 'Not authenticated') {
+        router.push({name: 'Login'});
+      } else {
+        return Promise.reject(error);
+      }
     }
   }
 });

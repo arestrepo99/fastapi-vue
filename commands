@@ -1,6 +1,5 @@
 https://testdriven.io/blog/developing-a-single-page-app-with-fastapi-and-vuejs/
 
-  GNU nano 2.9.3                     /etc/nginx/sites-available/default                                
 
 server {
     listen 80 default_server;
