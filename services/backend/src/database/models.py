@@ -8,12 +8,7 @@ class Users(models.Model):
     created_at = fields.DatetimeField(auto_now_add=True)
     modified_at = fields.DatetimeField(auto_now=True)
     is_superuser = fields.BooleanField(default=False)
-    groups = fields.ManyToManyField('models.Groups', related_name='users', null=True)
 
-class Groups(models.Model):
-    id = fields.IntField(pk=True)
-    name = fields.CharField(max_length=50, unique=True)
-    users: fields.ManyToManyRelation[Users] = fields.ManyToManyField('models.Users', related_name='groups')
 
 
 class Notes(models.Model):
