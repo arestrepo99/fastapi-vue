@@ -90,3 +90,8 @@ async def get_current_user(token: str = Depends(security)):
         raise credentials_exception
 
     return user
+
+async def is_superuser(user: UserOutSchema = Depends(get_current_user)):
+    if not user.is_superuser:
+        raise HTTPException(status_code=403, detail="Not authorized")
+    return user

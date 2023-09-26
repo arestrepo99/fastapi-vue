@@ -2,7 +2,9 @@
   <div id="app">
     <NavBar />
     <div class="main container">
-      <router-view/>
+      <div style="margin-left: 15%; margin-right: 15%;">
+        <router-view/>
+      </div>
     </div>
   </div>
 </template>

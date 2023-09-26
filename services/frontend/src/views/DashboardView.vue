@@ -1,5 +1,4 @@
 <template>
-	<div style="margin-left: 15%; margin-right: 15%;">
 		<section>
 			<h2>Productos</h2>
 
@@ -30,7 +29,6 @@
 				<q-btn v-if="user.is_superuser" @click="dialog.open = true; dialog.component= 'addProduct'; this.form = {title: '', content: ''}" label="Add Product" icon="add" />
 			</div>
 		</section>
-	</div>
 	<q-dialog v-model="dialog.open">
 		<q-card v-if="dialog.component === 'addProduct'">
 			<q-card-section>

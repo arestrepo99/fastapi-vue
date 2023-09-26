@@ -1,5 +1,9 @@
 from tortoise import fields, models
 
+class UserGroups(models.Model):
+    id = fields.IntField(pk=True)
+    name = fields.CharField(max_length=50, unique=True)
+    users = fields.ManyToManyField('models.Users', related_name='user_groups', through='UserGroup')
 
 class Users(models.Model):
     id = fields.IntField(pk=True)
@@ -9,7 +13,11 @@ class Users(models.Model):
     created_at = fields.DatetimeField(auto_now_add=True)
     modified_at = fields.DatetimeField(auto_now=True)
     is_superuser = fields.BooleanField(default=False)
+    groups = fields.ManyToManyField('models.UserGroups', related_name='group_users', through='UserGroup')
 
+class UserGroup(models.Model):
+    user = fields.ForeignKeyField('models.Users', related_name='user_group')
+    group = fields.ForeignKeyField('models.UserGroups', related_name='user_group')
 
 class Notes(models.Model):
     id = fields.IntField(pk=True)

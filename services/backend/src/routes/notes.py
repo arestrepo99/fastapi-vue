@@ -5,7 +5,7 @@ from tortoise.contrib.fastapi import HTTPNotFoundError
 from tortoise.exceptions import DoesNotExist
 
 import src.crud.notes as crud
-from src.auth.jwthandler import get_current_user
+from src.auth.jwthandler import is_superuser
 from src.schemas.notes import NoteOutSchema, NoteInSchema, UpdateNote
 from src.schemas.token import Status
 from src.schemas.users import UserOutSchema
@@ -17,7 +17,7 @@ router = APIRouter()
 @router.get(
     "/notes",
     response_model=List[NoteOutSchema],
-    dependencies=[Depends(get_current_user)],
+    dependencies=[Depends(is_superuser)],
 )
 async def get_notes():
     return await crud.get_notes()
@@ -26,7 +26,7 @@ async def get_notes():
 @router.get(
     "/note/{note_id}",
     response_model=NoteOutSchema,
-    dependencies=[Depends(get_current_user)],
+    dependencies=[Depends(is_superuser)],
 )
 async def get_note(note_id: int) -> NoteOutSchema:
     try:
@@ -39,24 +39,24 @@ async def get_note(note_id: int) -> NoteOutSchema:
 
 
 @router.post(
-    "/notes", response_model=NoteOutSchema, dependencies=[Depends(get_current_user)]
+    "/notes", response_model=NoteOutSchema, dependencies=[Depends(is_superuser)]
 )
 async def create_note(
-    note: NoteInSchema, current_user: UserOutSchema = Depends(get_current_user)
+    note: NoteInSchema, current_user: UserOutSchema = Depends(is_superuser)
 ) -> NoteOutSchema:
     return await crud.create_note(note, current_user)
 
 
 @router.patch(
     "/note/{note_id}",
-    dependencies=[Depends(get_current_user)],
+    dependencies=[Depends(is_superuser)],
     response_model=NoteOutSchema,
     responses={404: {"model": HTTPNotFoundError}},
 )
 async def update_note(
     note_id: int,
     note: UpdateNote,
-    current_user: UserOutSchema = Depends(get_current_user),
+    current_user: UserOutSchema = Depends(is_superuser),
 ) -> NoteOutSchema:
     return await crud.update_note(note_id, note, current_user)
 
@@ -65,9 +65,9 @@ async def update_note(
     "/note/{note_id}",
     response_model=Status,
     responses={404: {"model": HTTPNotFoundError}},
-    dependencies=[Depends(get_current_user)],
+    dependencies=[Depends(is_superuser)],
 )
 async def delete_note(
-    note_id: int, current_user: UserOutSchema = Depends(get_current_user)
+    note_id: int, current_user: UserOutSchema = Depends(is_superuser)
 ):
     return await crud.delete_note(note_id, current_user)
