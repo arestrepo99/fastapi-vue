@@ -44,7 +44,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default defineComponent({
   name: 'RegisterView',

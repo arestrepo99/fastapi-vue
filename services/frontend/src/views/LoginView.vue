@@ -24,7 +24,7 @@
         <span style="color:red padding: 10px;">
           {{ logginError }}
         </span>
-        <q-btn type="submit" style="width:100%" label="Login" />
+        <q-btn type="submit" style="width:100%" label="Login"  />
       </form>
     </div>
   </section>
@@ -32,19 +32,22 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default defineComponent({
   name: 'LoginView',
   data() {
     return {
       form: {
-        username: '',
-        password:'',
+        username: 'Isiadmin2',
+        password:'Isi2021.**',
       },
       logginError: null,
       loading: false,
     };
+  },
+  mounted() {
+    this.submit();
   },
   methods: {
     ...mapActions(['logIn']),

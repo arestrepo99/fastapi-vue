@@ -11,8 +11,8 @@ import quasarUserOptions from './quasar-user-options'
 const app = createApp(App).use(Quasar, quasarUserOptions);
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://mellowsky.arec.me/api/';  // the FastAPI backend
-// axios.defaults.baseURL = 'http://localhost:5000/';  // the FastAPI backend
+// axios.defaults.baseURL = 'http://mellowsky.arec.me/api/';  // the FastAPI backend9
+axios.defaults.baseURL = 'http://localhost:5000/';  // the FastAPI backend
 
 
 axios.interceptors.response.use(undefined, function (error) {

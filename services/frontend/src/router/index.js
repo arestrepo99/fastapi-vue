@@ -6,6 +6,7 @@ import DashboardView from '@/views/DashboardView.vue';
 import ProfileView from '@/views/ProfileView.vue';
 import NoteView from '@/views/NoteView.vue';
 import EditNoteView from '@/views/EditNoteView.vue';
+import AdminView from '@/views/AdminView.vue';
 import store from '@/store'; // NEW
 
 
@@ -50,6 +51,12 @@ const routes = [
     component: EditNoteView,
     meta: { requiresAuth: true },
     props: true,
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: AdminView,
+    meta: { requiresAuth: true },
   },
 ]
 
