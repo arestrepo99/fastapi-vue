@@ -1,7 +1,7 @@
 <template>
   <section>
-    <form @submit.prevent="submit">
-      <div class="mb-3">
+    <div style="margin-left: 15%; margin-right: 15%;">
+      <form @submit.prevent="submit">
         <q-input 
           type="text" 
           name="username" 
@@ -9,10 +9,8 @@
           label="Username" 
           required 
           :error="logginError!=null"
-          :error-message="logginError"
+          style="width:100%"
           />
-      </div>
-      <div class="mb-3">
         <q-input 
           type="password" 
           name="password" 
@@ -20,12 +18,16 @@
           label="Password" 
           required
           :error="logginError!=null"
+          style="width:100%"
+
         />
-      </div>
-      <q-btn type="submit" style="width:100%" label="Submit" />
-    </form>
+        <span style="color:red padding: 10px;">
+          {{ logginError }}
+        </span>
+        <q-btn type="submit" style="width:100%" label="Login" />
+      </form>
+    </div>
   </section>
-  {{ logginError }}
 </template>
 
 <script>
@@ -40,11 +42,9 @@ export default defineComponent({
         username: '',
         password:'',
       },
+      logginError: null,
       loading: false,
     };
-  },
-  computed: {
-    ...mapGetters(['logginError'])
   },
   methods: {
     ...mapActions(['logIn']),
@@ -59,10 +59,13 @@ export default defineComponent({
         this.$router.push('/dashboard');
       } catch (error) {
         this.loading = false;
-        throw 'Username or password is incorrect. Please try again.';
+        this.logginError = error.response.data.detail;
       }
       this.loading = false;
     }
-  }
+  },
+  beforeUnmount() {
+    this.logginError = null;
+  },
 });
 </script>

@@ -1,22 +1,45 @@
 <template>
   <section>
-    <form @submit.prevent="submit">
-      <div class="mb-3">
-        <label for="username" class="form-label">Username:</label>
-        <input type="text" name="username" v-model="user.username" class="form-control" />
-      </div>
-      <div class="mb-3">
-        <label for="full_name" class="form-label">Full Name:</label>
-        <input type="text" name="full_name" v-model="user.full_name" class="form-control" />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password:</label>
-        <input type="password" name="password" v-model="user.password" class="form-control" />
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <!-- Margin sides  -->
+    <div style="margin-left: 15%; margin-right: 15%;">
+      <form @submit.prevent="submit">
+        <q-input 
+          type="text" 
+          name="username" 
+          v-model="user.username"
+          label="Username" 
+          required 
+          :error="registerError!=null"
+          style="width:100%"
+          />
+        <q-input
+          type="text"
+          name="full_name"
+          v-model="user.full_name"
+          label="Full Name"
+          required
+          :error="registerError!=null"
+          style="width:100%"
+        />
+        <q-input 
+          type="password" 
+          name="password" 
+          v-model="user.password" 
+          label="Password" 
+          required
+          :error="registerError!=null"
+          style="width:100%"
+        />
+
+        
+        <span style="color:red padding: 10px;">
+          {{ registerError }}
+        </span>
+        <q-btn type="submit" style="width:100%" label="Register" ></q-btn>
+
+      </form>
+    </div>
   </section>
-  {{ logginError }}
 </template>
 
 <script>
@@ -32,10 +55,8 @@ export default defineComponent({
         full_name: '',
         password: '',
       },
+      registerError: null,
     };
-  },
-  computed: {
-    ...mapGetters(['logginError'])
   },
   methods: {
     ...mapActions(['register']),
@@ -44,9 +65,12 @@ export default defineComponent({
         await this.register(this.user);
         this.$router.push('/dashboard');
       } catch (error) {
-        throw 'Username already exists. Please try again.';
+        this.registerError = error.response.data.detail;
       }
     },
+  },
+  beforeUnmount() {
+
   },
 });
 </script>

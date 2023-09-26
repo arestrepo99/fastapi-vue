@@ -16,7 +16,6 @@ import axios from 'axios';
 const state = {
   user: null,
   loggedIn: false,
-  logginError: null,
 };
 
 const getters = {
@@ -28,26 +27,16 @@ const getters = {
 
 const actions = {
   async register({dispatch, commit}, form) {
-    try {
-      await axios.post('register', form);
-      let UserForm = new FormData();
-      UserForm.append('username', form.username);
-      UserForm.append('password', form.password);
-      await dispatch('logIn', UserForm);
-    } catch (error) {
-      commit('setLogginError', error.response.data.detail);
-      throw error;
-    }
+
+    await axios.post('register', form);
+    let UserForm = new FormData();
+    UserForm.append('username', form.username);
+    UserForm.append('password', form.password);
+    await dispatch('logIn', UserForm);
   },
   async logIn({dispatch, commit}, user) {
-    try {
-      await axios.post('login', user)
-      await dispatch('viewMe');
-      commit('setLogginError', null);
-    } catch (error) {
-      commit('setLogginError', error.response.data.detail);
-      throw error;
-    }
+    await axios.post('login', user)
+    await dispatch('viewMe');
   },
   async viewMe({commit}) {
     let {data} = await axios.get('users/whoami');

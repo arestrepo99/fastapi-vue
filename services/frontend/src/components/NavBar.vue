@@ -1,8 +1,8 @@
 <template>
-  <header>
+  <!-- <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="/">Vendo Flores</a>
+        <a class="navbar-brand" href="/">Vuex</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,7 +35,26 @@
         </div>
       </div>
     </nav>
+  </header> -->
+  <header>
+    <q-toolbar class="bg-black text-white">
+      <q-toolbar-title>
+        Vuex App
+      </q-toolbar-title>
+      
+      <q-btn flat dense class="navBarItem" to="/" v-if="isLoggedIn">Home</q-btn>
+      <q-btn flat dense class="navBarItem" to="/productos" v-if="isLoggedIn">Productos</q-btn>
+      <q-space />
+      <q-btn flat dense class="navBarItem" to="/profile" v-if="isLoggedIn">My Profile</q-btn>
+      <q-btn flat dense class="navBarItem" icon="notifications"  v-if="isLoggedIn"><q-badge floating color="red">2</q-badge></q-btn>
+      <q-btn flat dense class="navBarItem" to="/admin" v-if="isLoggedIn">Admin</q-btn>
+      <q-btn flat dense class="navBarItem" @click="logout" v-if="isLoggedIn">Log Out</q-btn>
+      <q-btn flat dense class="navBarItem" to="/register" v-if="!isLoggedIn">Register</q-btn>
+      <q-btn flat dense class="navBarItem" to="/login" v-if="!isLoggedIn">Log In</q-btn>
+
+    </q-toolbar>
   </header>
+
 </template>
 
 <script>
@@ -60,5 +79,8 @@ export default defineComponent({
 <style scoped>
 a {
   cursor: pointer;
+}
+.navBarItem {
+  margin-left: 10px;
 }
 </style>
