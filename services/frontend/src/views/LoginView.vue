@@ -39,8 +39,8 @@ export default defineComponent({
   data() {
     return {
       form: {
-        username: 'siu',
-        password:'vescar-ruTho9-byrsin',
+        username: '',
+        password:'',
       },
       logginError: null,
       loading: false,
