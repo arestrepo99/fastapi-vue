@@ -5,7 +5,7 @@ module.exports = defineConfig({
   ],
 
   devServer: {
-    allowedHosts: ['cloud.arec.me']
+    allowedHosts: ['mellowsky.arec.me']
   },
 
   pluginOptions: {
