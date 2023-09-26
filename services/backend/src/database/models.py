@@ -3,7 +3,7 @@ from tortoise import fields, models
 class UserGroups(models.Model):
     id = fields.IntField(pk=True)
     name = fields.CharField(max_length=50, unique=True)
-    users = fields.ManyToManyField('models.Users', related_name='user_groups', through='UserGroup')
+    users = fields.ManyToManyField('models.Users', related_name='group_users', through='UserGroup')
 
 class Users(models.Model):
     id = fields.IntField(pk=True)
