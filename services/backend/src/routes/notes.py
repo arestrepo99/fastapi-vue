@@ -5,7 +5,7 @@ from tortoise.contrib.fastapi import HTTPNotFoundError
 from tortoise.exceptions import DoesNotExist
 
 import src.crud.notes as crud
-from src.auth.jwthandler import is_superuser
+from src.auth.jwthandler import is_superuser, get_current_user
 from src.schemas.notes import NoteOutSchema, NoteInSchema, UpdateNote
 from src.schemas.token import Status
 from src.schemas.users import UserOutSchema
@@ -26,7 +26,7 @@ async def get_notes():
 @router.get(
     "/note/{note_id}",
     response_model=NoteOutSchema,
-    dependencies=[Depends(is_superuser)],
+    dependencies=[Depends(get_current_user)],
 )
 async def get_note(note_id: int) -> NoteOutSchema:
     try:

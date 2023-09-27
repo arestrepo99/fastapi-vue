@@ -24,12 +24,14 @@ const actions = {
     commit('setNote', data);
   },
   // eslint-disable-next-line no-empty-pattern
-  async updateNote({}, note) {
-    await axios.patch(`note/${note.id}`, note.form);
+  async updateNote({dispatch}, note) {
+    await axios.patch(`note/${note.id}`, {title: note.title, content: note.content, img_url: note.img_url});
+    await dispatch('getNotes');
   },
   // eslint-disable-next-line no-empty-pattern
-  async deleteNote({}, id) {
+  async deleteNote({dispatch}, id) {
     await axios.delete(`note/${id}`);
+    await dispatch('getNotes');
   }
 };
 

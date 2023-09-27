@@ -27,7 +27,7 @@ async def update_note(note_id, note, current_user) -> NoteOutSchema:
     except DoesNotExist:
         raise HTTPException(status_code=404, detail=f"Note {note_id} not found")
 
-    if db_note.author.id == current_user.id:
+    if db_note.author.id == current_user.id or current_user.is_superuser:
         await Notes.filter(id=note_id).update(**note.dict(exclude_unset=True))
         return await NoteOutSchema.from_queryset_single(Notes.get(id=note_id))
 

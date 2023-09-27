@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from tortoise import Tortoise
 
 from src.database.register import register_tortoise
@@ -17,7 +18,7 @@ https://stackoverflow.com/questions/65531387/tortoise-orm-for-python-no-returns-
 from src.routes import users, notes
 
 app = FastAPI()
-
+app.mount("/static", StaticFiles(directory="static"), name="static")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:8080"],
@@ -34,3 +35,5 @@ register_tortoise(app, config=TORTOISE_ORM, generate_schemas=False)
 @app.get("/")
 def home():
     return "Mellowsky API"
+
+#  Static files

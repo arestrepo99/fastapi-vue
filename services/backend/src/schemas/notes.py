@@ -18,3 +18,4 @@ NoteOutSchema = pydantic_model_creator(
 class UpdateNote(BaseModel):
     title: Optional[str]
     content: Optional[str]
+    img_url: Optional[str]
