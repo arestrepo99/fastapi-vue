@@ -8,15 +8,19 @@
 			<q-btn flat dense square class="navBarItem" to="/profile" v-if="isLoggedIn">My Profile</q-btn>
 
 			<q-btn flat dense square class="navBarItem" icon="notifications"  v-if="isLoggedIn">
-				<q-badge floating color="red">2</q-badge>
+				<q-badge floating color="red">1</q-badge>
 				<q-menu>
 				<q-list style="min-width: 200px">
 					<q-item clickable>
-						<q-item-section>Notification 1</q-item-section>
+						<!-- Avatar -->
+						<q-item-section avatar>
+							<q-avatar icon="notifications" /></q-avatar>
+						</q-item-section>
+						<q-item-section>Wellcome To MellowSky!</q-item-section>
 					</q-item>
-					<q-item clickable>
+					<!-- <q-item clickable>
 						<q-item-section>Notification 2</q-item-section>
-					</q-item>
+					</q-item> -->
 				</q-list>
 				</q-menu>
 			</q-btn>
