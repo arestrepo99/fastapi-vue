@@ -17,7 +17,7 @@ router = APIRouter()
 @router.get(
     "/notes",
     response_model=List[NoteOutSchema],
-    dependencies=[Depends(is_superuser)],
+    dependencies=[Depends(get_current_user)],
 )
 async def get_notes():
     return await crud.get_notes()
