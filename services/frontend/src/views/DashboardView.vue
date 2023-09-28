@@ -1,9 +1,9 @@
 <template>
 	<section>
 		<h2>Productos</h2>
-
+		
 		<hr/><br/>
-		<div v-if="notes.length" class="fit row wrap justify-center items-start content-start center" style="overflow: hidden;">
+		<div v-if="notes!= null" class="fit row wrap justify-center items-start content-start center" style="overflow: hidden;">
 			<div v-for="note in notes" :key="note.id" style="margin: 10px; width: 100%; max-width: 250px;">
 				<q-card class="my-card">
 				<q-img :src="note.img_url||'https://cdn.quasar.dev/img/parallax2.jpg'">
