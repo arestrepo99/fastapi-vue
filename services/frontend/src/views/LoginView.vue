@@ -39,15 +39,15 @@ export default defineComponent({
   data() {
     return {
       form: {
-        username: 'Isiadmin2',
-        password:'Isi2021.**',
+        username: '',
+        password:'',
       },
       logginError: null,
       loading: false,
     };
   },
   mounted() {
-    this.submit();
+    // this.submit();
   },
   methods: {
     ...mapActions(['logIn']),
