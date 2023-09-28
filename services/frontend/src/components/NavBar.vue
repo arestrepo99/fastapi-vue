@@ -14,7 +14,7 @@
 					<q-item clickable>
 						<!-- Avatar -->
 						<q-item-section avatar>
-							<q-avatar icon="notifications" /></q-avatar>
+							<q-avatar icon="notifications"/>
 						</q-item-section>
 						<q-item-section>Wellcome To MellowSky!</q-item-section>
 					</q-item>
