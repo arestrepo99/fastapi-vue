@@ -1,12 +1,37 @@
 <template>
 	<header>
 		<q-toolbar class="bg-black text-white" v-if="spaceWidth>0">
-			<q-btn flat dense square size="lg" to="/" >Vuex App</q-btn>
+			<q-btn flat dense square size="lg" to="/" >Mellosky</q-btn>
 			<q-btn flat dense square class="navBarItem" to="/" v-if="isLoggedIn">Home</q-btn>
 			<q-btn flat dense square class="navBarItem" to="/dashboard" v-if="isLoggedIn">Productos</q-btn>
 			<q-space ref="space"/>
 			<q-btn flat dense square class="navBarItem" to="/profile" v-if="isLoggedIn">My Profile</q-btn>
-			<q-btn flat dense square class="navBarItem" icon="notifications"  v-if="isLoggedIn"><q-badge floating color="red">2</q-badge></q-btn>
+
+			<q-btn flat dense square class="navBarItem" icon="notifications"  v-if="isLoggedIn">
+				<q-badge floating color="red">2</q-badge>
+				<q-menu>
+				<q-list style="min-width: 200px">
+					<q-item clickable>
+						<q-item-section>Notification 1</q-item-section>
+					</q-item>
+					<q-item clickable>
+						<q-item-section>Notification 2</q-item-section>
+					</q-item>
+				</q-list>
+				</q-menu>
+			</q-btn>
+			<!-- <q-btn-dropdown dense square icon="notifications" v-if="isLoggedIn" > -->
+<!-- 				
+				<q-list>
+					<q-item clickable>
+						<q-item-section>Notification 1</q-item-section>
+					</q-item>
+					<q-item clickable>
+						<q-item-section>Notification 2</q-item-section>
+					</q-item>
+				</q-list>
+				
+			</q-btn-dropdown> -->
 			<q-btn flat dense square class="navBarItem" to="/admin" v-if="isLoggedIn&&user.is_superuser">Admin</q-btn>
 			<q-btn flat dense square class="navBarItem" @click="logout" v-if="isLoggedIn">Log Out</q-btn>
 			<q-btn flat dense square class="navBarItem" to="/register" v-if="!isLoggedIn">Register</q-btn>

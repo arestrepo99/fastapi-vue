@@ -22,3 +22,16 @@ class Notes(models.Model):
 
     def __str__(self):
         return f"{self.title}, {self.author_id} on {self.created_at}"
+
+
+# class Notification(models.Model):
+#     id = fields.IntField(pk=True)
+#     title = fields.CharField(max_length=225)
+#     content = fields.TextField()
+#     created_at = fields.DatetimeField(auto_now_add=True)
+#     modified_at = fields.DatetimeField(auto_now=True)
+#     is_read = fields.BooleanField(default=False)
+#     user = fields.ForeignKeyField("models.Users", related_name="notification")
+
+#     def __str__(self):
+#         return f"{self.title}, {self.user_id} on {self.created_at}"

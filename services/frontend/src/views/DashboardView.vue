@@ -7,16 +7,24 @@
 			<div v-for="note in notes" :key="note.id" style="margin: 10px; width: 100%; max-width: 250px;">
 				<q-card class="my-card">
 				<q-img :src="note.img_url||'https://cdn.quasar.dev/img/parallax2.jpg'">
-					<div class="absolute-bottom">
-					<div class="text-h6">{{ note.title }}</div>
-					<div class="text-subtitle2">{{ note.content }}</div>
+					<div class="absolute-bottom row" style="font-size: 0.5em;">
+						<div class="col">
+							<div class="text-h6">{{ note.title }}</div>
+							<div class="text-subtitle2">{{ note.content }}</div>
+						</div>
+						<div class="col">
+							<!-- <q-btn flat label="Order" icon="add_shopping_cart" style="font-size: 4em;"/> -->
+							<q-btn flat label="Add to Cart" icon="add_shopping_cart" style="font-size: 1.4em;" />
+						</div>
+						<!-- <div class="col"> -->
+							
+						<!-- </div> -->
 					</div>
 				</q-img>
 
-				<q-card-actions align="right">
-					<q-btn flat label="Order" icon="add_shopping_cart" />
-					<q-btn flat label="Edit" v-if="user.is_superuser" icon="edit" @click="dialog.open = true; dialog.component= 'editProduct'; this.form = note" />
-					<q-btn flat label="Delete" v-if="user.is_superuser" icon="delete" @click="dialog.open = true; dialog.component= 'deleteProduct'; this.form = note" />
+				<q-card-actions align="right"  v-if="user.is_superuser" >
+					<q-btn flat label="Edit" icon="edit" @click="dialog.open = true; dialog.component= 'editProduct'; this.form = note" />
+					<q-btn flat label="Delete" icon="delete" @click="dialog.open = true; dialog.component= 'deleteProduct'; this.form = note" />
 				</q-card-actions>
 				</q-card>
 			</div>
